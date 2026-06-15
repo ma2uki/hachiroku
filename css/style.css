@@ -1,0 +1,250 @@
+@charset "UTF-8";
+
+/* 全体設計 */
+:root {
+  --primary-color: #333333;
+  --bg-light: #f9f9f9;
+  --text-muted: #666666;
+  --font-main: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: var(--font-main);
+  color: var(--primary-color);
+  background-color: var(--bg-light);
+  line-height: 1.8;
+}
+
+/* カルーセル（ヒーローエリア） */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 60vh; /* スマホ・PC双方で見やすいバランスの良い高さに調整 */
+  overflow: hidden;
+  background-color: #000;
+  touch-action: pan-y;
+}
+
+.carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 画像が左右に切れず、全体が画面に収まるように修正 */
+  opacity: 0.85;
+}
+
+/* カルーセル上のテキスト */
+.carousel-caption {
+  position: absolute;
+  bottom: 50px;
+  left: 5%;
+  right: 5%;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+
+.carousel-caption h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  letter-spacing: 0.1em;
+}
+
+.carousel-caption p {
+  font-size: 1rem;
+}
+
+/* カルーセルボタン */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5); /* スマホでも見やすいよう少し濃く */
+  color: white;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+  -webkit-tap-highlight-color: transparent; /* タップ時の青い選択色を消す */
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-btn.prev { left: 10px; }
+.carousel-btn.next { right: 10px; }
+
+/* インジケーター（ドット） */
+.carousel-dots {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: #ffffff;
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* メインコンテンツ（各セクション）のレイアウト */
+.container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+/* カード風のデザイン（background, 白背景, shadow, paddingなど）を
+   完全に削除し、すっきりしたプレーンなレイアウトに変更しました
+*/
+.info-section {
+  display: flex;
+  align-items: center;
+  gap: 6%;
+  margin-bottom: 90px;
+}
+
+.info-section.reverse {
+  flex-direction: row-reverse;
+}
+
+.section-image {
+  flex: 1;
+  max-width: 50%;
+}
+
+.section-image img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.section-content {
+  flex: 1;
+}
+
+.section-content h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-content h2::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 35px;
+  height: 3px;
+  background-color: #0076df;
+  border-radius: 2px;
+}
+
+.section-content p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  text-align: justify;
+}
+
+/* フッター */
+footer {
+  background: #222;
+  color: #aaa;
+  text-align: center;
+  padding: 25px 20px;
+  font-size: 0.85rem;
+}
+
+/* レレスポンシブ対応（スマホ表示） */
+@media (max-width: 768px) {
+  .carousel {
+    height: 45vh; /* スマホ用に高さを少しコンパクトに */
+  }
+  
+  .carousel-caption h3 {
+    font-size: 1.4rem;
+  }
+  
+  .carousel-caption p {
+    font-size: 0.85rem;
+  }
+
+  /* スマホでもボタンを表示したまま、サイズを少し小さくして押しやすく調整 */
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.8rem;
+  }
+  .carousel-btn.prev { left: 5px; }
+  .carousel-btn.next { right: 5px; }
+
+  /* セクションの縦並び化、カード感をなくしたので余白をすっきり調整 */
+  .info-section, .info-section.reverse {
+    flex-direction: column;
+    margin-bottom: 60px;
+    gap: 15px;
+  }
+  
+  .section-image, .section-content {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .section-image img {
+    height: 240px;
+  }
+  
+  .section-content h2 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+}
