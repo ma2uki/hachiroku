@@ -89,4 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
+  setInterval(() => {
+  updateCarousel(currentIndex + 1);
+}, 5000);
 });
