@@ -140,9 +140,6 @@ body {
   padding: 60px 20px;
 }
 
-/* カード風のデザイン（background, 白背景, shadow, paddingなど）を
-   完全に削除し、すっきりしたプレーンなレイアウトに変更しました
-*/
 .info-section {
   display: flex;
   align-items: center;
@@ -158,7 +155,9 @@ body {
   flex: 1;
   max-width: 50%;
 }
-
+#sec-lesson img {
+  object-fit: contain;
+}
 .section-image img {
   width: 100%;
   height: 350px;
@@ -242,7 +241,6 @@ footer {
   .section-image img {
     height: 240px;
   }
-  
   .section-content h2 {
     font-size: 1.4rem;
     margin-bottom: 10px;
